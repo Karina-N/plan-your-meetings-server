@@ -17,16 +17,18 @@ passport.deserializeUser((userIdFromSession, cb) => {
   });
 });
 
+// const configObj = { usernameField: "email", passwordField: "password" };
+
 passport.use(
-  new LocalStrategy((username, password, next) => {
-    User.findOne({ username }, (err, foundUser) => {
+  new LocalStrategy({ usernameField: "email", passwordField: "password" }, (email, password, next) => {
+    User.findOne({ email }, (err, foundUser) => {
       if (err) {
         next(err);
         return;
       }
 
       if (!foundUser) {
-        next(null, false, { message: "Incorrect username." });
+        next(null, false, { message: "Incorrect email." });
         return;
       }
 

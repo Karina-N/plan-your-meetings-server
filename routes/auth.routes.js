@@ -11,8 +11,6 @@ const User = require("../models/User.model");
 
 router.post("/signup", (req, res, next) => {
   const { name, email, password, phone, business, address } = req.body;
-  console.log("INSIDE POST");
-  console.log(req.body);
 
   if (!name || !email || !password) {
     res.status(400).json({ message: "Provide name, email and password" });
@@ -35,7 +33,7 @@ router.post("/signup", (req, res, next) => {
     .then((hashedPassword) => {
       console.log("INSIDE BCRYPT");
       return User.create({
-        name,
+        username: name,
         email,
         password: hashedPassword,
         phone,
@@ -44,8 +42,6 @@ router.post("/signup", (req, res, next) => {
       });
     })
     .then((userFromDB) => {
-      console.log(">>>>>>>>");
-      console.log(userFromDB);
       console.log("Newly created user is: ", userFromDB);
       res.json(userFromDB);
     })
@@ -54,7 +50,7 @@ router.post("/signup", (req, res, next) => {
         res.status(400).json({ errorMessage: error.message });
       } else if (error.code === 11000) {
         res.status(400).json({
-          errorMessage: "Username needs to be unique.",
+          errorMessage: "Email needs to be unique.",
         });
       } else {
         next(error);
