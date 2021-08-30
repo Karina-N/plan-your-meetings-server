@@ -6,7 +6,7 @@ const Client = require("../models/Client.model");
 
 // GET ALL USER'S CLIENTS
 router.get("/clients", (req, res, next) => {
-  Client.find()
+  Client.find({ owner: req.user.id })
     .then((allClients) => res.json(allClients))
     .catch((err) => res.json(err));
 });
@@ -36,7 +36,7 @@ router.post("/clients", (req, res, next) => {
     description,
     address,
     meetings: [],
-    owner: req.body.owner, // change to owner: req.user._id
+    owner: req.user._id,
   })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
