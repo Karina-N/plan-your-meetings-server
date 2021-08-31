@@ -31,7 +31,6 @@ router.post("/signup", (req, res, next) => {
     .genSalt(SALT_ROUNDS)
     .then((salt) => bcryptjs.hash(password, salt))
     .then((hashedPassword) => {
-      console.log("INSIDE BCRYPT");
       return User.create({
         username: name,
         email,
