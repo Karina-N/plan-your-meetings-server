@@ -20,13 +20,8 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required."],
     },
-    phone: String,
-    business: String,
     address: String,
   }
-  // {
-  //   timestamps: true,
-  // }
 );
 
 const User = model("User", userSchema);
