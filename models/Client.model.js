@@ -5,7 +5,10 @@ const meetingSchema = new Schema({
     type: String,
     required: [true, "Date is required."],
   },
-  title: String,
+  title: {
+    type: String,
+    required: [true, "Date is required."],
+  },
   location: {
     type: String,
     required: [true, "Location is required."],
