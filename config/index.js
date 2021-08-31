@@ -29,6 +29,8 @@ module.exports = (app) => {
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
 
+  app.set("trust proxy", 1);
+
   app.use(
     cors({
       credentials: true,
