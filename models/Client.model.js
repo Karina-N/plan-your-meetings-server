@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const meetingSchema = new Schema({
   date: {
-    type: String,
+    type: Date,
     required: [true, "Date is required."],
   },
   title: {
