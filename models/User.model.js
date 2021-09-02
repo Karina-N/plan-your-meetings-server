@@ -18,7 +18,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, "Password is required."],
-    match: [/^[a-zA-Z0-9!@#$%^&*]{6,16}$/, "Please use valid password."],
   },
   address: String,
 });

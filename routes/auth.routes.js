@@ -10,7 +10,7 @@ const SALT_ROUNDS = 10;
 const User = require("../models/User.model");
 
 router.post("/signup", (req, res, next) => {
-  const { name, email, password, phone, business, address } = req.body;
+  const { name, email, password, address } = req.body;
 
   if (!name || !email || !password) {
     res.status(400).json({ message: "Provide name, email and password" });
@@ -35,8 +35,6 @@ router.post("/signup", (req, res, next) => {
         username: name,
         email,
         password: hashedPassword,
-        phone,
-        business,
         address,
       });
     })
