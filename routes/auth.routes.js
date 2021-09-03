@@ -39,8 +39,13 @@ router.post("/signup", (req, res, next) => {
       });
     })
     .then((userFromDB) => {
-      console.log("Newly created user is: ", userFromDB);
-      res.json(userFromDB);
+      req.login(userFromDB, (err) => {
+        if (err) {
+          res.status(500).json({ message: "Session save went bad." });
+          return;
+        }
+        res.json(userFromDB);
+      });
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
